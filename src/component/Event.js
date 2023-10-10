@@ -5,7 +5,6 @@ import {StatsContext} from "../context/StatsContext";
 
 function Side({children}) {
     return <Card variant={"outlined"} sx={{
-        width: 400,
         display: "flex",
         flexDirection: "column",
         gap: 2,
@@ -20,7 +19,6 @@ function Side({children}) {
  */
 const Event = ({event}) => {
     let context = useContext(StatsContext);
-    const {fameState: [fame, setFame], followersState: [followers, setFollowers]} = context
     const [consequence, setConsequence] = useState()
 
 
@@ -31,22 +29,20 @@ const Event = ({event}) => {
         let eitherConsequences = event.eitherConsequences;
         setConsequence(eitherConsequences)
         setFLip(true);
-        console.log({event})
         eitherConsequences.apply(context)
     };
     let handleOr = () => {
         let orConsequences = event.orConsequences;
         setConsequence(orConsequences)
-        console.log({event})
         setFLip(true);
         orConsequences.apply(context)
 
     };
     return <>
-        <Box>
-            <ReactCardFlip isFlipped={flip} flipDirection={flipDirection} infinite={false}>
+        <Box sx={{width: 1.0}}>
+            <ReactCardFlip isFlipped={flip} flipDirection={flipDirection}>
                 <Side>
-                        <Typography level={"h1"}>{title}</Typography>
+                        <Typography variant={"h4"} >{title}</Typography>
                         <Typography>{description}</Typography>
                         <Typography>{question}</Typography>
                         <Button variant="outlined" onClick={handleEither}>{eitherDescription}</Button>
@@ -61,7 +57,7 @@ const Event = ({event}) => {
                     <Button onClick={() => {
                         setFLip(false);
                         return done();
-                    }}>done</Button>
+                    }}>weiter</Button>
                 </Side>
             </ReactCardFlip>
         </Box>
