@@ -6,7 +6,7 @@ git add package-lock.json
 rm -rf docs
 npm run build
 mv build docs
-git add -a docs
+git add -A docs
 
 git commit -m "release v$1"
 git tag $1
