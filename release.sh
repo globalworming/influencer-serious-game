@@ -1,4 +1,5 @@
 set -e
+ssh-add
 npm version --no-git-tag-version $1
 git add package.json
 git add package-lock.json

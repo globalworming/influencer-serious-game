@@ -2,6 +2,7 @@ import {Box, Button, Card, Typography} from "@mui/material";
 import {useContext, useState} from "react";
 import ReactCardFlip from "react-card-flip";
 import {StatsContext} from "../context/StatsContext";
+import DeltaStat from "./DeltaStat";
 
 function Side({children}) {
     return <Card variant={"outlined"} sx={{
@@ -17,12 +18,12 @@ function Side({children}) {
 /**
  * @param {EventModel} event
  */
-const Event = ({event}) => {
+const Event = ({event, next}) => {
     let context = useContext(StatsContext);
     const [consequence, setConsequence] = useState()
 
 
-    const {title, description, question, eitherDescription, orDescription, done} = event;
+    const {title, description, question, eitherDescription, orDescription} = event;
     const [flip, setFLip] = useState(false);
     const flipDirection = "horizontal"
     let handleEither = () => {
@@ -39,7 +40,7 @@ const Event = ({event}) => {
 
     };
     return <>
-        <Box sx={{width: 1.0}}>
+        <Box sx={{width: 1.0, maxWidth: 500}}>
             <ReactCardFlip isFlipped={flip} flipDirection={flipDirection}>
                 <Side>
                         <Typography variant={"h4"} >{title}</Typography>
@@ -49,14 +50,18 @@ const Event = ({event}) => {
                         <Button variant="outlined" onClick={handleOr}>{orDescription}</Button>
                 </Side>
                 <Side>
+
                     {consequence && <>
+
                         <Typography>{consequence.description}</Typography>
-                        <Typography>Fame: {consequence.deltaFame}</Typography>
-                        <Typography>Follower: {consequence.deltaFollower}</Typography>
+                        <DeltaStat label={"Bekanntheit"} value={consequence.deltaNotoriety}/>
+                        <DeltaStat label={"Beliebtheit"} value={consequence.deltaPopularity}/>
+                        <DeltaStat label={"Geld"} value={consequence.deltaMoney}/>
+                        <DeltaStat label={"Privatleben"} value={consequence.deltaPrivateLife}/>
                     </>}
                     <Button onClick={() => {
                         setFLip(false);
-                        return done();
+                        return next();
                     }}>weiter</Button>
                 </Side>
             </ReactCardFlip>

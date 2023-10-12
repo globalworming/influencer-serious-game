@@ -1,48 +1,43 @@
 import {useContext, useState} from "react"
 import EventComponent from "./component/Event";
-import EventModel from "./model/EventModel";
 import {AppBar, Box, Button, Toolbar, Typography} from "@mui/material";
 import {StatsContext} from "./context/StatsContext";
-import Consequences from "./model/Consequences";
-
+import Events from "./model/Events";
+import Stat from "./component/Stat";
 
 const App = () => {
-    const {fameState: [fame, setFame], followersState: [followers, setFollowers]} = useContext(StatsContext);
-    const [end, setEnd] = useState(false)
-
-    const initialEvent = new EventModel("wake up", "you alarm is rining.", " start a new day?", "another 5 minutes", "yeah, the early bird catches the worm", new Consequences("your followers are waiting...", -2, -2), new Consequences("yalla yalla!", +2, +2), () => {
-        setEvent(secondEvent)
-    });
-
-    const secondEvent = new EventModel("first twiddle", "Your followers probably want to know you are awake", "What do you post?", "photo #nomakeup", "think of a weird dream", new Consequences("looks weird", -7, -7), new Consequences("good one", +3, +3), () => {
-        setEnd(true)
-    });
-
-    const [event, setEvent] = useState(initialEvent);
+    const {
+        notorietyState: [noto, setNoto],
+        popularityState: [pop, setPop],
+        moneyState: [money, setMoney],
+        privateLifeState: [life, setLife],
+    } = useContext(StatsContext);
+    const [index, setIndex] = useState(0)
+    const end = index >= Events.length;
 
     return (
         <>
             <AppBar position="static">
                 <Toolbar sx={{justifyContent: "center", gap: 8}}>
-                    <Typography variant="h6">
-                        Fame: {fame}
-                    </Typography>
-                    <Typography variant="h6">
-                        Followers: {followers}
-                    </Typography>
+                    <Stat label={"Bekanntheit"} value={noto}/>
+                    <Stat label={"Beliebtheit"} value={pop}/>
+                    <Stat label={"Geld"} value={money}/>
+                    <Stat label={"Privatleben"} value={life}/>
                 </Toolbar>
             </AppBar>
 
             <Box sx={{p: 1, width: 1.0, display: "flex", justifyContent: "center"}}>
-                {!end && <EventComponent event={event}/>}
+                {!end && <EventComponent event={Events[index]} next={() => setIndex(index + 1)}/>}
                 {end && <>
-                    <Box sx={{width: 1.0, display: "flex", alignItems: "center", flexDirection: "column", gap: 4, p:4}}>
+                    <Box
+                        sx={{width: 1.0, display: "flex", alignItems: "center", flexDirection: "column", gap: 4, p: 4}}>
                         <Typography variant={"h3"}>you did it!</Typography>
                         <Typography><Button variant={"outlined"} onClick={() => {
-                            setEvent(initialEvent)
-                            setEnd(false)
-                            setFollowers(10)
-                            setFame(10)
+                            setIndex(0)
+                            setNoto(0)
+                            setPop(0)
+                            setMoney(0)
+                            setLife(0)
                         }}>again!</Button></Typography>
                     </Box>
                 </>}

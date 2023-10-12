@@ -1,19 +1,30 @@
 class Consequences {
-    deltaFollower
+    deltaNotoriety
+    deltaMoney;
+    deltaPrivateLife;
     description;
-    deltaFame
+    deltaPopularity
 
 
-    constructor(description, deltaFollower, deltaFame) {
+    constructor(description, deltaNotoriety, deltaPopularity, deltaMoney, deltaPrivateLife) {
         this.description = description;
-        this.deltaFollower = deltaFollower;
-        this.deltaFame = deltaFame;
+        this.deltaMoney = deltaMoney;
+        this.deltaPrivateLife = deltaPrivateLife;
+        this.deltaNotoriety = deltaNotoriety;
+        this.deltaPopularity = deltaPopularity;
     }
 
     apply(context) {
-        const {fameState: [fame, setFame], followersState: [followers, setFollowers]} = context
-        setFame(fame + this.deltaFame)
-        setFollowers(followers + this.deltaFollower)
+        const {
+            notorietyState: [noto, setNoto],
+            popularityState: [pop, setPop],
+            moneyState: [money, setMoney],
+            privateLifeState: [life, setLife],
+        } = context;
+        setNoto(noto + this.deltaNotoriety)
+        setPop(pop + this.deltaPopularity)
+        setMoney(money + this.deltaMoney)
+        setLife(life + this.deltaPrivateLife)
     }
 }
 
