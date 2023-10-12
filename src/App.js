@@ -18,7 +18,7 @@ const App = () => {
     return (
         <>
             <AppBar position="static">
-                <Toolbar sx={{justifyContent: "space-around", columnGap: 4, flexWrap: "wrap"}}>
+                <Toolbar sx={{justifyContent: "space-around", columnGap: 4, flexWrap: "wrap", maxWidth: 700, margin: "0 auto"}}>
                     <Stat label={"Bekanntheit"} value={noto}/>
                     <Stat label={"Beliebtheit"} value={pop}/>
                     <Stat label={"Geld"} value={money}/>
