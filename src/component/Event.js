@@ -17,6 +17,7 @@ function Side({children}) {
 
 /**
  * @param {EventModel} event
+ * @param {function} event
  */
 const Event = ({event, next}) => {
     let context = useContext(StatsContext);
@@ -52,17 +53,17 @@ const Event = ({event, next}) => {
                 <Side>
 
                     {consequence && <>
-
                         <Typography>{consequence.description}</Typography>
                         <DeltaStat label={"Bekanntheit"} value={consequence.deltaNotoriety}/>
                         <DeltaStat label={"Beliebtheit"} value={consequence.deltaPopularity}/>
                         <DeltaStat label={"Geld"} value={consequence.deltaMoney}/>
                         <DeltaStat label={"Privatleben"} value={consequence.deltaPrivateLife}/>
+                        <Button onClick={() => {
+                            setFLip(false);
+                            setTimeout(() => setConsequence(null), 300)
+                            return next();
+                        }}>weiter</Button>
                     </>}
-                    <Button onClick={() => {
-                        setFLip(false);
-                        return next();
-                    }}>weiter</Button>
                 </Side>
             </ReactCardFlip>
         </Box>

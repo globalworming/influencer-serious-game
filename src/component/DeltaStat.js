@@ -1,11 +1,11 @@
 import {Box, Typography} from "@mui/material";
-import AddBox from '@mui/icons-material/AddBox';
+import Add from '@mui/icons-material/AddBox';
+import Remove from '@mui/icons-material/IndeterminateCheckBox';
 import {useEffect, useState} from "react";
 
 const DeltaStat = ({label, value}) => {
     const [toShow, setToShow] = useState(0)
     const abs = Math.abs(value);
-console.log({toShow, value})
     useEffect(() => {
 
         if (toShow < abs) {
@@ -17,16 +17,15 @@ console.log({toShow, value})
 
     if (value === 0) return null
 
-    const component = value > 0 ? <AddBox color={"success"}/> : null ;
-
-
+    const component = value > 0 ? <Add color={"success"}/> : <Remove color={"error"}/> ;
+    let i = 0;
     return <>
         <Box display={"flex"} alignItems={"center"}>
         <Typography variant={"h6"}>
         {label}:
     </Typography>
             <Box m={0.5}/>
-        {Array.from({length: toShow}, () => <>{component}</>)}
+        {Array.from({length: toShow}, () => <Box key={i++}>{component}</Box>)}
         </Box>
 
     </>;
