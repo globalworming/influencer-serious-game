@@ -1,4 +1,4 @@
-import {Box, Button, Card, Typography} from "@mui/material";
+import {Button, Card, Typography} from "@mui/material";
 import {useContext, useState} from "react";
 import ReactCardFlip from "react-card-flip";
 import {StatsContext} from "../context/StatsContext";
@@ -41,7 +41,6 @@ const Event = ({event, next}) => {
 
     };
     return <>
-        <Box sx={{width: 1.0, maxWidth: 500}}>
             <ReactCardFlip isFlipped={flip} flipDirection={flipDirection}>
                 <Side>
                         <Typography variant={"h4"} >{title}</Typography>
@@ -66,7 +65,6 @@ const Event = ({event, next}) => {
                     </>}
                 </Side>
             </ReactCardFlip>
-        </Box>
     </>
 }
 
