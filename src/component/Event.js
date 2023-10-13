@@ -17,7 +17,7 @@ function Side({children}) {
 
 /**
  * @param {EventModel} event
- * @param {function} event
+ * @param {function} next
  */
 const Event = ({event, next}) => {
     let context = useContext(StatsContext);
