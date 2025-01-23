@@ -320,7 +320,7 @@ const Events = [
         ),
         new Consequences(
             "Nach einer Zeit verlieren sie das Interesse und gehen von alleine wieder. Allerdings ist deine Adresse jetzt bekannt.",
-            +2
+            +2,
             +1,
             0,
             -2
